@@ -25,6 +25,19 @@ export class Rover {
     );
   }
 
+  turn(direction: Command) {
+    const newOrientation =
+      Rover.TURN_MAPPING[direction][this.roverPosition.orientation];
+    this.roverPosition = new RoverPositionVO(
+      { x: this.roverPosition.position.x, y: this.roverPosition.position.y },
+      newOrientation,
+    );
+  }
+
+  getPosition() {
+    return this.roverPosition.getStringified();
+  }
+
   private bound(newPosition: { x: number; y: number }) {
     if (newPosition.x >= this.maxX) {
       newPosition.x = 0;
@@ -53,18 +66,5 @@ export class Rover {
       default:
         return { x, y };
     }
-  }
-
-  turn(direction: Command) {
-    const newOrientation =
-      Rover.TURN_MAPPING[direction][this.roverPosition.orientation];
-    this.roverPosition = new RoverPositionVO(
-      { x: this.roverPosition.position.x, y: this.roverPosition.position.y },
-      newOrientation,
-    );
-  }
-
-  getPosition() {
-    return this.roverPosition.getStringified();
   }
 }
