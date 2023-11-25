@@ -1,11 +1,17 @@
-import { Rover } from './rover';
+import { Command, Rover } from './rover';
 
 export class Handler {
   constructor(private readonly rover: Rover) {}
 
-  execute(command: string): string {
-    const movements = command.split('');
-    movements.forEach(() => this.rover.move());
+  execute(commands: string): string {
+    const parsedCommands = commands.split('') as Command[];
+    parsedCommands.forEach((command) => {
+      if (command === 'M') {
+        this.rover.move();
+        return;
+      }
+      this.rover.turn(command);
+    });
     return this.rover.getPosition();
   }
 }

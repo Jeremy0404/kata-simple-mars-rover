@@ -15,6 +15,18 @@ describe('rover', () => {
   it('moves multiple time', () => {
     verify('MM', '0:2:N');
   });
+
+  it('turns left', () => {
+    verify('L', '0:0:W');
+  });
+
+  it('turns right', () => {
+    verify('R', '0:0:E');
+  });
+
+  it('turns and move', () => {
+    verify('RM', '1:0:E');
+  });
 });
 
 function verify(command: string, expected: string) {
