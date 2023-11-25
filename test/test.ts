@@ -27,6 +27,14 @@ describe('rover', () => {
   it('turns and move', () => {
     verify('RM', '1:0:E');
   });
+
+  it('turns and move multiple times', () => {
+    verify('MMRMMLM', '2:3:N');
+  });
+
+  it('reaches end of grid', () => {
+    verify('MMMMMMMMMM', '0:0:N');
+  });
 });
 
 function verify(command: string, expected: string) {
