@@ -1,16 +1,14 @@
-type Orientation = 'N' | 'S' | 'E' | 'W';
-interface RoverPosition {
-  x: number;
-  y: number;
-  orientation: Orientation;
-}
-export type Turn = 'L' | 'R';
-export type Command = 'M' | Turn;
+import { Command, Orientation, RoverPosition } from './types';
 
 export class Rover {
   private x: number;
   private y: number;
   private orientation: Orientation;
+
+  private static readonly TURN_MAPPING = {
+    R: { N: 'E', S: 'W', E: 'S', W: 'N' },
+    L: { N: 'W', S: 'E', E: 'N', W: 'S' },
+  };
 
   constructor(initialPosition: string) {
     const parsedPosition = this.parseRoverPosition(initialPosition);
@@ -37,22 +35,7 @@ export class Rover {
   }
 
   turn(direction: Command) {
-    const directionResults = {
-      R: {
-        N: 'E',
-        S: 'W',
-        E: 'S',
-        W: 'N',
-      },
-      L: {
-        N: 'W',
-        S: 'E',
-        E: 'N',
-        W: 'S',
-      },
-    };
-
-    this.orientation = directionResults[direction][this.orientation];
+    this.orientation = Rover.TURN_MAPPING[direction][this.orientation];
   }
 
   getPosition() {
@@ -61,6 +44,9 @@ export class Rover {
 
   private parseRoverPosition(positionString: string): RoverPosition {
     const position = positionString.split(':');
+    if (position.length !== 3 || !['N', 'S', 'E', 'W'].includes(position[2]))
+      throw new Error('Invalid initial position');
+
     return {
       x: +position[0],
       y: +position[1],

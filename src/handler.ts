@@ -1,4 +1,5 @@
-import { Command, Rover } from './rover';
+import { Rover } from './rover';
+import { Command } from './types';
 
 export class Handler {
   constructor(private readonly rover: Rover) {}
