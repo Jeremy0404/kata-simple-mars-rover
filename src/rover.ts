@@ -1,4 +1,4 @@
-type Orientation = 'N' | 'S' | 'E' | 'O';
+type Orientation = 'N' | 'S' | 'E' | 'W';
 export class Rover {
   x: number;
   y: number;
@@ -11,7 +11,22 @@ export class Rover {
     this.orientation = parsedPosition[2] as Orientation;
   }
 
-  move() {}
+  move() {
+    switch (this.orientation) {
+      case 'N':
+        this.y++;
+        break;
+      case 'S':
+        this.y--;
+        break;
+      case 'E':
+        this.x++;
+        break;
+      case 'W':
+        this.x--;
+        break;
+    }
+  }
 
   getPosition() {
     return `${this.x}:${this.y}:${this.orientation}`;
