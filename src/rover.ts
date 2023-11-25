@@ -4,8 +4,8 @@ import { RoverPositionVO } from './roverPositionVO';
 export class Rover {
   private roverPosition: RoverPositionVO;
 
-  private readonly maxX: number = 10;
-  private readonly maxY: number = 10;
+  private readonly maxX: number = 9;
+  private readonly maxY: number = 9;
 
   private static readonly TURN_MAPPING = {
     R: {
@@ -49,13 +49,13 @@ export class Rover {
   }
 
   private bound(newPosition: { x: number; y: number }) {
-    if (newPosition.x >= this.maxX) {
+    if (newPosition.x > this.maxX) {
       newPosition.x = 0;
     } else if (newPosition.x < 0) {
       newPosition.x = this.maxX;
     }
 
-    if (newPosition.y >= this.maxY) {
+    if (newPosition.y > this.maxY) {
       newPosition.y = 0;
     } else if (newPosition.y < 0) {
       newPosition.y = this.maxY;

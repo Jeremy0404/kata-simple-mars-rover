@@ -32,8 +32,20 @@ describe('rover', () => {
     verify('MMRMMLM', '2:3:N');
   });
 
-  it('reaches end of grid', () => {
-    verify('MMMMMMMMMM', '0:0:N');
+  it('reaches top of the grid', () => {
+    verify('MMMMMMMMMMM', '0:1:N');
+  });
+
+  it('reaches bottom of the grid', () => {
+    verify('RRMM', '0:8:S');
+  });
+
+  it('reaches extreme right of the grid', () => {
+    verify('RMMMMMMMMMMM', '1:0:E');
+  });
+
+  it('reaches extreme left of the grid', () => {
+    verify('LMM', '8:0:W');
   });
 });
 
