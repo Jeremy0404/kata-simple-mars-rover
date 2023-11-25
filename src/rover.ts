@@ -1,4 +1,4 @@
-import { Command } from './types';
+import { Command, Orientation } from './types';
 import { RoverPositionVO } from './roverPositionVO';
 
 export class Rover {
@@ -8,8 +8,18 @@ export class Rover {
   private readonly maxY: number = 10;
 
   private static readonly TURN_MAPPING = {
-    R: { N: 'E', S: 'W', E: 'S', W: 'N' },
-    L: { N: 'W', S: 'E', E: 'N', W: 'S' },
+    R: {
+      N: Orientation.E,
+      S: Orientation.W,
+      E: Orientation.S,
+      W: Orientation.N,
+    },
+    L: {
+      N: Orientation.W,
+      S: Orientation.E,
+      E: Orientation.N,
+      W: Orientation.S,
+    },
   };
 
   constructor(initialPosition: string) {
@@ -55,13 +65,13 @@ export class Rover {
   private calculateNewPosition(): { x: number; y: number } {
     const { x, y } = this.roverPosition.position;
     switch (this.roverPosition.orientation) {
-      case 'N':
+      case Orientation.N:
         return { x, y: y + 1 };
-      case 'S':
+      case Orientation.S:
         return { x, y: y - 1 };
-      case 'E':
+      case Orientation.E:
         return { x: x + 1, y };
-      case 'W':
+      case Orientation.W:
         return { x: x - 1, y };
       default:
         return { x, y };

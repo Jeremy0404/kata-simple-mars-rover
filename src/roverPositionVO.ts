@@ -8,7 +8,7 @@ export class RoverPositionVO {
 
   static createFromString(positionString: string) {
     const position = positionString.split(':');
-    if (position.length !== 3 || !['N', 'S', 'E', 'W'].includes(position[2]))
+    if (position.length !== 3 || !(position[2] in Orientation))
       throw new Error('Invalid position');
 
     return new RoverPositionVO(

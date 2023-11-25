@@ -1,4 +1,9 @@
-export type Orientation = 'N' | 'S' | 'E' | 'W';
+export enum Orientation {
+  N = 'N',
+  S = 'S',
+  E = 'E',
+  W = 'W',
+}
 export interface RoverPosition {
   x: number;
   y: number;
